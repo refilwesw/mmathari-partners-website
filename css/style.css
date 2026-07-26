@@ -227,6 +227,12 @@ p{
     color:var(--text);
 }
 /* ===========================
+   HERO TAGLINE
+=========================== */
+.hero .lead{
+       text-align:center;
+}
+/* ===========================
    PAGE HERO
 =========================== */
 .page-hero{
@@ -1313,7 +1319,24 @@ textarea.form-control{
 
 }
 
+/* ===========================
+   LEFT ALIGN TEXT INSIDE CARDS
+=========================== */
+.service-card p,
+.value-card p,
+.insight-card p,
+.contact-card p{
+   text-align:left;
+}
 
-
-
+/* ===========================
+   JUSTIFY LONG TEXT ONLY
+=========================== */
+.hero p,
+.home-about p,
+.profile-card p,
+.highligh-box p{
+   text-align:justify;
+ text-justify:inter-word;
+}
 
