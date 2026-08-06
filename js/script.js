@@ -100,3 +100,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+document.querySelectorAll(".read-more-btn").forEach(button => {
+
+    button.addEventListener("click", function () {
+
+        const moreText = this.previousElementSibling;
+
+        moreText.classList.toggle("show");
+
+        if (moreText.classList.contains("show")) {
+
+            this.textContent = "Read Less";
+
+        } else {
+
+            this.textContent = "Read More";
+
+        }
+
+    });
+
+});
+
+
+

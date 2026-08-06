@@ -1339,4 +1339,44 @@ textarea.form-control{
    text-align:justify;
  text-justify:inter-word;
 }
+.more-text {
+
+    display: none;
+
+    margin-top: 15px;
+
+}
+
+.more-text.show {
+
+    display: block;
+
+}
+
+.read-more-btn {
+
+    margin-top: 15px;
+
+    background: transparent;
+
+    color: #0d6efd;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    padding: 0;
+
+    font-size: 15px;
+
+}
+
+.read-more-btn:hover {
+
+    text-decoration: underline;
+
+}
+
 
