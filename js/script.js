@@ -122,6 +122,49 @@ document.querySelectorAll(".read-more-btn").forEach(button => {
 
 });
 
+function showTeam(teamId) {
+
+    // Hide all team panels
+
+    document.querySelectorAll(".team-panel").forEach(panel => {
+
+        panel.classList.remove("active");
+
+    });
+
+    // Remove active state from all buttons
+
+    document.querySelectorAll(".team-tab").forEach(button => {
+
+        button.classList.remove("active");
+
+    });
+
+    // Show selected panel
+
+    const selectedPanel = document.getElementById(teamId);
+
+    if (selectedPanel) {
+
+        selectedPanel.classList.add("active");
+
+    }
+
+    // Activate selected button
+
+    document.querySelectorAll(".team-tab").forEach(button => {
+
+        if (button.getAttribute("onclick") === `showTeam('${teamId}')`) {
+
+            button.classList.add("active");
+
+        }
+
+    });
+
+}
+
+
 
 
 
