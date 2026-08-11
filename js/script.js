@@ -122,50 +122,102 @@ document.querySelectorAll(".read-more-btn").forEach(button => {
 
 });
 
-function showTeam(teamId) {
+/* ==========================================================
 
-    // Hide all team panels
+   TEAM DROPDOWN
 
-    document.querySelectorAll(".team-panel").forEach(panel => {
+   ========================================================== */
 
-        panel.classList.remove("active");
+document.addEventListener("DOMContentLoaded", function () {
 
-    });
+    function activateTeamSection() {
 
-    // Remove active state from all buttons
+        const hash = window.location.hash.substring(1);
 
-    document.querySelectorAll(".team-tab").forEach(button => {
+        const panels = document.querySelectorAll(".team-panel");
 
-        button.classList.remove("active");
+        /* No section selected:
 
-    });
+           keep Executive Leadership active */
 
-    // Show selected panel
+        if (!hash) {
 
-    const selectedPanel = document.getElementById(teamId);
-
-    if (selectedPanel) {
-
-        selectedPanel.classList.add("active");
-
-    }
-
-    // Activate selected button
-
-    document.querySelectorAll(".team-tab").forEach(button => {
-
-        if (button.getAttribute("onclick") === `showTeam('${teamId}')`) {
-
-            button.classList.add("active");
+            return;
 
         }
 
-    });
+        const selectedPanel = document.getElementById(hash);
 
-}
+        /* Ignore hashes that are not Team sections */
 
+        if (!selectedPanel ||
 
+            !selectedPanel.classList.contains("team-panel")) {
 
+            return;
 
+        }
+
+        /* Hide all Team sections */
+
+        panels.forEach(function (panel) {
+
+            panel.classList.remove("active");
+
+        });
+
+        /* Show selected Team section */
+
+        selectedPanel.classList.add("active");
+
+        /* Scroll to selected section */
+
+        setTimeout(function () {
+
+            selectedPanel.scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "start"
+
+            });
+
+        }, 100);
+
+    }
+
+    /* Activate section when Team page loads */
+
+    activateTeamSection();
+
+    /* Activate section when dropdown link is clicked */
+
+    window.addEventListener("hashchange", activateTeamSection);
+
+    /* ======================================================
+
+       MOBILE TEAM DROPDOWN
+
+       ====================================================== */
+
+    const teamDropdown = document.querySelector(".nav-dropdown > a");
+
+    if (teamDropdown) {
+
+        teamDropdown.addEventListener("click", function (event) {
+
+            if (window.innerWidth <= 768) {
+
+                event.preventDefault();
+
+                this.parentElement.classList.toggle("open");
+
+            }
+
+        });
+
+    }
+
+});
 
 

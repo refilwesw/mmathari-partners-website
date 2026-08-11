@@ -2563,4 +2563,233 @@ p {
 
 }
 
+/* ==========================================================
+
+   TEAM DROPDOWN NAVIGATION
+
+   ========================================================== */
+
+.nav-dropdown {
+
+    position: relative;
+
+}
+
+.nav-dropdown > a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+}
+
+.nav-dropdown > a i {
+
+    font-size: 10px;
+
+    transition: transform 0.25s ease;
+
+}
+
+.dropdown-menu {
+
+    position: absolute;
+
+    top: 100%;
+
+    left: 50%;
+
+    transform: translateX(-50%) translateY(8px);
+
+    min-width: 260px;
+
+    background: #FFFFFF;
+
+    border-radius: 6px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+    padding: 8px 0;
+
+    margin: 0;
+
+    list-style: none;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition: opacity 0.2s ease,
+
+                transform 0.2s ease,
+
+                visibility 0.2s ease;
+
+    z-index: 9999;
+
+}
+
+.dropdown-menu li {
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+.dropdown-menu li a {
+
+    display: block;
+
+    padding: 10px 18px;
+
+    color: #6F4518;
+
+    background: #FFFFFF;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    transition: background 0.2s ease,
+
+                color 0.2s ease;
+
+}
+
+.dropdown-menu li a:hover {
+
+    background: #F3D5B5;
+
+    color: #6F4518;
+
+}
+
+/* Desktop hover */
+
+@media (min-width: 769px) {
+
+    .nav-dropdown:hover .dropdown-menu {
+
+        opacity: 1;
+
+        visibility: visible;
+
+        pointer-events: auto;
+
+        transform: translateX(-50%) translateY(0);
+
+    }
+
+    .nav-dropdown:hover > a i {
+
+        transform: rotate(180deg);
+
+    }
+
+}
+
+/* ==========================================================
+
+   MOBILE TEAM DROPDOWN
+
+   ========================================================== */
+
+@media (max-width: 768px) {
+
+    .nav-dropdown > a {
+
+        justify-content: center;
+
+    }
+
+    .dropdown-menu {
+
+        position: static;
+
+        transform: none;
+
+        width: 100%;
+
+        min-width: 0;
+
+        box-shadow: none;
+
+        border-radius: 0;
+
+        opacity: 1;
+
+        visibility: visible;
+
+        pointer-events: auto;
+
+        display: none;
+
+        padding: 0;
+
+        margin-top: 5px;
+
+    }
+
+    .nav-dropdown.open .dropdown-menu {
+
+        display: block;
+
+    }
+
+    .dropdown-menu li a {
+
+        text-align: center;
+
+        padding: 10px 15px;
+
+        font-size: 14px;
+
+    }
+
+}
+
+/* ==========================================================
+
+   TEAM QUALIFICATION LIST
+
+   ========================================================== */
+qualifications {
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    color: var(--text);
+
+}
+
+.qualifications strong {
+
+    font-weight: 600;
+
+}
+
+.qualifications span {
+
+    color: rgb(50, 205, 50);
+
+    font-weight: 700;
+
+    margin: 0 6px;
+
+}
+
+
+
+
+
 
