@@ -4566,6 +4566,846 @@ transform: translateY(80px);
 
 }
 
+/* =========================================================
+
+   FINAL MOBILE RESPONSIVE FIXES
+
+   Mobile only — desktop layout remains unchanged
+
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    /* -----------------------------------------------------
+
+       1. GLOBAL MOBILE FIXES
+
+       ----------------------------------------------------- */
+
+    html,
+
+    body {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        overflow-x: hidden;
+
+    }
+
+    *,
+
+    *::before,
+
+    *::after {
+
+        box-sizing: border-box;
+
+    }
+
+    .container {
+
+        width: 92%;
+
+        max-width: 100%;
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+    }
+
+    img {
+
+        max-width: 100%;
+
+    }
+
+    h1 {
+
+        font-size: 2rem;
+
+        line-height: 1.2;
+
+    }
+
+    h2 {
+
+        font-size: 1.55rem;
+
+        line-height: 1.25;
+
+    }
+
+    h3 {
+
+        font-size: 1.2rem;
+
+        line-height: 1.3;
+
+    }
+
+    p {
+
+        font-size: 0.98rem;
+
+        line-height: 1.65;
+
+    }
+
+    /* -----------------------------------------------------
+
+       2. MOBILE NAVIGATION
+
+       ----------------------------------------------------- */
+
+    .navbar {
+
+        height: 70px;
+
+        min-height: 70px;
+
+        padding: 0 15px;
+
+    }
+
+    .logo img {
+
+        max-height: 50px;
+
+        width: auto;
+
+    }
+
+    .menu-toggle {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        z-index: 1001;
+
+    }
+
+    .nav-links {
+
+        position: absolute;
+
+        top: 70px;
+
+        left: 0;
+
+        right: 0;
+
+        width: 100%;
+
+        max-height: 0;
+
+        overflow: hidden;
+
+        padding: 0;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 0;
+
+        z-index: 1000;
+
+    }
+
+    .nav-links.active {
+
+        max-height: 600px;
+
+        padding: 15px 0;
+
+    }
+
+    .nav-links a {
+
+        display: block;
+
+        width: 100%;
+
+        text-align: center;
+
+        padding: 12px 20px;
+
+    }
+
+    /* -----------------------------------------------------
+
+       3. HOMEPAGE HERO
+
+       Keeps text readable and avoids covering faces
+
+       ----------------------------------------------------- */
+
+    .mp-home-hero {
+
+        min-height: 650px;
+
+        height: auto;
+
+        display: flex;
+
+        align-items: flex-end;
+
+        padding: 40px 0;
+
+        overflow: hidden;
+
+    }
+
+    .mp-home-slide {
+
+        background-size: cover;
+
+        background-position: center top;
+
+    }
+
+    .mp-home-overlay {
+
+        background: rgba(0, 0, 0, 0.18);
+
+    }
+
+    .mp-home-content {
+
+        width: calc(100% - 30px);
+
+        max-width: none;
+
+        margin: 0 15px;
+
+        padding: 25px 20px;
+
+        transform: none;
+
+        position: relative;
+
+        z-index: 3;
+
+    }
+
+    .mp-home-content h1 {
+
+        font-size: 2rem;
+
+        line-height: 1.2;
+
+    }
+
+    .mp-home-content p {
+
+        font-size: 0.95rem;
+
+        line-height: 1.6;
+
+    }
+
+    .mp-home-content .btn {
+
+        width: 100%;
+
+        margin-top: 15px;
+
+    }
+
+    /* -----------------------------------------------------
+
+       4. GENERAL HERO SECTIONS
+
+       ----------------------------------------------------- */
+
+    .hero {
+
+        min-height: 65vh;
+
+        padding: 80px 0 50px;
+
+    }
+
+    .hero-content {
+
+        width: 92%;
+
+        max-width: 100%;
+
+        margin: 0 auto;
+
+        text-align: center;
+
+    }
+
+    /* -----------------------------------------------------
+
+       5. TEAM HERO
+
+       Do NOT change the image filename/path
+
+       ----------------------------------------------------- */
+
+    .team-page-hero {
+
+        width: 100%;
+
+        margin: 0;
+
+        padding: 0;
+
+    }
+
+    .team-page-hero .team-hero-image {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        margin: 0;
+
+        padding: 0;
+
+        overflow: hidden;
+
+    }
+
+    .team-page-hero .team-hero-image img {
+
+        display: block;
+
+        width: 100%;
+
+        height: auto;
+
+        max-width: 100%;
+
+        object-fit: contain;
+
+        object-position: center;
+
+    }
+
+    .team-hero-title {
+
+        position: static;
+
+        width: 100%;
+
+        padding: 18px 15px 10px;
+
+        text-align: center;
+
+    }
+
+    .team-hero-title h1 {
+
+        margin: 0;
+
+        font-size: 2rem;
+
+        line-height: 1.2;
+
+    }
+
+    .team-page-intro {
+
+        width: 92%;
+
+        margin: 0 auto;
+
+        padding: 15px 0 30px;
+
+        text-align: center;
+
+    }
+
+    .team-page-intro p {
+
+        margin: 0;
+
+        font-size: 0.95rem;
+
+        line-height: 1.65;
+
+    }
+
+    /* -----------------------------------------------------
+
+       6. TEAM / PROFILE PHOTOS
+
+       Prevent heads and faces from being cut off
+
+       ----------------------------------------------------- */
+
+    .profile-card > img {
+
+        width: 100%;
+
+        height: auto;
+
+        aspect-ratio: auto;
+
+        object-fit: contain;
+
+        object-position: center top;
+
+        display: block;
+
+    }
+
+    .profile-image {
+
+        height: auto;
+
+        min-height: 0;
+
+        overflow: visible;
+
+    }
+
+    .profile-image img {
+
+        width: 100%;
+
+        height: auto;
+
+        object-fit: contain;
+
+        object-position: center top;
+
+        display: block;
+
+    }
+
+    .profile-card {
+
+        width: 100%;
+
+        overflow: hidden;
+
+    }
+
+    /* -----------------------------------------------------
+
+       7. ABOUT PAGE
+
+       Stack image and text on mobile
+
+       ----------------------------------------------------- */
+
+    .about-section {
+
+        width: 100%;
+
+        overflow: hidden;
+
+    }
+
+    .about-team-slideshow {
+
+        position: relative;
+
+        top: auto;
+
+        right: auto;
+
+        width: 100%;
+
+        height: auto;
+
+        min-height: 0;
+
+        overflow: hidden;
+
+    }
+
+    .about-team-slide img {
+
+        width: 100%;
+
+        height: auto;
+
+        max-width: 100%;
+
+        object-fit: contain;
+
+        object-position: center;
+
+        display: block;
+
+    }
+
+    .about-section .container {
+
+        width: 92%;
+
+        position: relative;
+
+        z-index: 2;
+
+        margin: 0 auto;
+
+        padding: 35px 0;
+
+    }
+
+    /* -----------------------------------------------------
+
+       8. ABOUT HOMEPAGE SLIDESHOW
+
+       ----------------------------------------------------- */
+
+    .about-home-slideshow {
+
+        width: 100%;
+
+        height: auto;
+
+        min-height: 0;
+
+        overflow: hidden;
+
+    }
+
+    .about-home-slide img {
+
+        width: 100%;
+
+        height: auto;
+
+        max-width: 100%;
+
+        object-fit: contain;
+
+        object-position: center;
+
+        display: block;
+
+    }
+
+    /* -----------------------------------------------------
+
+       9. PORTFOLIO SLIDESHOW
+
+       ----------------------------------------------------- */
+
+    .portfolio-slideshow {
+
+        width: 100%;
+
+        height: auto;
+
+        min-height: 0;
+
+        overflow: hidden;
+
+    }
+
+    .portfolio-slide img {
+
+        width: 100%;
+
+        height: auto;
+
+        max-width: 100%;
+
+        object-fit: contain;
+
+        object-position: center;
+
+        display: block;
+
+    }
+
+    /* -----------------------------------------------------
+
+       10. CAREERS SLIDESHOW
+
+       ----------------------------------------------------- */
+
+    .careers-slideshow {
+
+        width: 100%;
+
+        height: auto;
+
+        min-height: 0;
+
+        overflow: hidden;
+
+    }
+
+    .careers-slide img {
+
+        width: 100%;
+
+        height: auto;
+
+        max-width: 100%;
+
+        object-fit: contain;
+
+        object-position: center;
+
+        display: block;
+
+    }
+
+    /* -----------------------------------------------------
+
+       11. CONTACT PHOTO
+
+       ----------------------------------------------------- */
+
+    .contact-photo {
+
+        width: 100%;
+
+        height: auto;
+
+        min-height: 0;
+
+        margin: 0 auto;
+
+        overflow: hidden;
+
+    }
+
+    .contact-photo img {
+
+        width: 100%;
+
+        height: auto;
+
+        max-width: 100%;
+
+        object-fit: contain;
+
+        object-position: center;
+
+        display: block;
+
+    }
+
+    /* -----------------------------------------------------
+
+       12. GRIDS
+
+       ----------------------------------------------------- */
+
+    .grid-2,
+
+    .grid-3,
+
+    .grid-4,
+
+    .stats-grid,
+
+    .footer-grid,
+
+    .profile-grid,
+
+    .insight-grid {
+
+        grid-template-columns: 1fr;
+
+        width: 100%;
+
+    }
+
+    /* -----------------------------------------------------
+
+       13. CARDS
+
+       ----------------------------------------------------- */
+
+    .card,
+
+    .profile-card,
+
+    .insight-card {
+
+        width: 100%;
+
+        max-width: 100%;
+
+    }
+
+    /* -----------------------------------------------------
+
+       14. BUTTONS
+
+       ----------------------------------------------------- */
+
+    .btn {
+
+        max-width: 100%;
+
+        white-space: normal;
+
+    }
+
+    /* -----------------------------------------------------
+
+       15. FORMS
+
+       ----------------------------------------------------- */
+
+    .contact-form {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        padding: 25px 20px;
+
+    }
+
+    input,
+
+    textarea,
+
+    select {
+
+        width: 100%;
+
+        max-width: 100%;
+
+    }
+
+    /* -----------------------------------------------------
+
+       16. FOOTER
+
+       ----------------------------------------------------- */
+
+    .footer-grid {
+
+        gap: 30px;
+
+    }
+
+    footer {
+
+        overflow: hidden;
+
+    }
+
+    /* -----------------------------------------------------
+
+       17. TABLES
+
+       ----------------------------------------------------- */
+
+    .table-container {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        overflow-x: auto;
+
+    }
+
+}
+
+/* =========================================================
+
+   EXTRA-SMALL PHONES
+
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .container {
+
+        width: 94%;
+
+    }
+
+    .navbar {
+
+        padding: 0 12px;
+
+    }
+
+    .logo img {
+
+        max-height: 45px;
+
+    }
+
+    h1 {
+
+        font-size: 1.75rem;
+
+    }
+
+    h2 {
+
+        font-size: 1.4rem;
+
+    }
+
+    p {
+
+        font-size: 0.94rem;
+
+        line-height: 1.6;
+
+    }
+
+    .mp-home-hero {
+
+        min-height: 620px;
+
+        padding-bottom: 25px;
+
+    }
+
+    .mp-home-content {
+
+        width: calc(100% - 24px);
+
+        margin: 0 12px;
+
+        padding: 20px 16px;
+
+    }
+
+    .mp-home-content h1 {
+
+        font-size: 1.75rem;
+
+    }
+
+    .team-hero-title h1 {
+
+        font-size: 1.75rem;
+
+    }
+
+    .team-page-intro {
+
+        width: 94%;
+
+    }
+
+    .contact-form {
+
+        padding: 20px 15px;
+
+    }
+
+}
+
 
 
 
