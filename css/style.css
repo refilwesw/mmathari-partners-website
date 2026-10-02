@@ -5192,26 +5192,28 @@ transform: translateY(80px);
 
 }
 
+
+
+
 /* ==========================================================
-   MMATHARI PARTNERS - TEAM HERO SLIDESHOW
-   FINAL MASTER RULES
+   TEAM HERO — 5 PHOTO SLIDESHOW
+   FINAL TEAM-ONLY OVERRIDE
    ========================================================== */
 
 .team-hero-slideshow {
     position: relative !important;
     width: 100% !important;
-    max-width: 1200px !important;
     height: 600px !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
     overflow: hidden !important;
-    isolation: isolate !important;
-    background: #ffffff !important;
+    isolation: isolate;
 }
 
 .team-hero-slideshow .hero-slide {
     position: absolute !important;
-    inset: 0 !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
     width: 100% !important;
     height: 100% !important;
     margin: 0 !important;
@@ -5219,25 +5221,26 @@ transform: translateY(80px);
     opacity: 0 !important;
     visibility: hidden !important;
     z-index: 0 !important;
-    transition: opacity 1.2s ease-in-out !important;
+    display: block !important;
+    transition: opacity 1.2s ease-in-out;
 }
 
 .team-hero-slideshow .hero-slide.active {
-    position: absolute !important;
     opacity: 1 !important;
     visibility: visible !important;
-    z-index: 2 !important;
+    z-index: 1 !important;
 }
 
 .team-hero-slideshow .hero-slide img {
     display: block !important;
     width: 100% !important;
     height: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
     object-fit: contain !important;
     object-position: center center !important;
-    background: #ffffff !important;
+    background: #f5f5f5;
 }
 
 .team-hero-slideshow .hero-slide-dots {
@@ -5245,40 +5248,35 @@ transform: translateY(80px);
     left: 50% !important;
     bottom: 20px !important;
     transform: translateX(-50%) !important;
-    z-index: 20 !important;
+    z-index: 10 !important;
     display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
     gap: 8px !important;
-    padding: 8px 12px !important;
+    padding: 7px 10px !important;
     border-radius: 20px !important;
-    background: rgba(0, 0, 0, 0.35) !important;
-    backdrop-filter: blur(4px) !important;
+    background: rgba(0, 0, 0, 0.30);
+    backdrop-filter: blur(4px);
 }
 
-.team-hero-slideshow .hero-slide-dots button,
 .team-hero-slideshow .hero-dot {
-    width: 11px !important;
-    height: 11px !important;
-    min-width: 11px !important;
-    min-height: 11px !important;
+    width: 10px !important;
+    height: 10px !important;
+    min-width: 10px !important;
+    min-height: 10px !important;
     padding: 0 !important;
-    margin: 0 !important;
     border: 1px solid #ffffff !important;
     border-radius: 50% !important;
     background: transparent !important;
-    cursor: pointer !important;
-    appearance: none !important;
+    cursor: pointer;
 }
 
-.team-hero-slideshow .hero-slide-dots button.active,
 .team-hero-slideshow .hero-dot.active {
     background: #ffffff !important;
+    transform: scale(1.15);
 }
 
 @media (max-width: 768px) {
     .team-hero-slideshow {
-        height: 450px !important;
+        height: 420px !important;
     }
 }
 
@@ -5286,4 +5284,16 @@ transform: translateY(80px);
     .team-hero-slideshow {
         height: 350px !important;
     }
+}
+
+/* ==========================================================
+   HOMEPAGE SLIDESHOW — SHOW FULL PHOTOGRAPH
+   TEAM FIX DOES NOT AFFECT HOMEPAGE
+   ========================================================== */
+
+.mp-home-hero .mp-home-slide {
+    background-size: contain !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-color: #f3d5b5;
 }
