@@ -5192,4 +5192,125 @@ transform: translateY(80px);
 
 }
 
+/* ==========================================================
+   TEAM HERO - 5 PHOTO SLIDESHOW
+   IMPORTANT: keep the complete photographs visible.
+   Do NOT use object-fit: cover here.
+   ========================================================== */
 
+.team-hero-slideshow {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    isolation: isolate;
+    background: #ffffff;
+}
+
+/*
+   The active slide remains in normal document flow.
+   This allows the hero to take the natural height of
+   the photograph instead of forcing the photo into
+   a short, fixed-height box.
+*/
+.team-hero-slideshow .hero-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+
+.team-hero-slideshow .hero-slide.active {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+}
+
+.team-hero-slideshow .hero-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto;
+    object-fit: contain;
+    object-position: center center;
+}
+
+/* Slideshow dots */
+.team-hero-slideshow .hero-slide-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    display: flex;
+    gap: 8px;
+
+    padding: 7px 10px;
+    border-radius: 20px;
+
+    background: rgba(0, 0, 0, 0.30);
+    backdrop-filter: blur(4px);
+}
+
+.team-hero-slideshow .hero-dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+
+    background: transparent;
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+.team-hero-slideshow .hero-dot.active {
+    background: #ffffff;
+    transform: scale(1.15);
+}
+
+/* Prevent the browser from treating the dots as form buttons */
+.team-hero-slideshow .hero-dot {
+    appearance: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .team-hero-slideshow {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .team-hero-slideshow .hero-slide img {
+        width: 100%;
+        height: auto;
+    }
+
+    .team-hero-slideshow .hero-slide-dots {
+        bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .team-hero-slideshow .hero-slide-dots {
+        bottom: 12px;
+        gap: 6px;
+    }
+
+    .team-hero-slideshow .hero-dot {
+        width: 9px;
+        height: 9px;
+    }
+}

@@ -1,36 +1,42 @@
-/*==========================================================
+// ==========================================================
 
-  MMATHARI PARTNERS
+// MMATHARI PARTNERS - MAIN JAVASCRIPT
 
-  Corporate Website JavaScript
-
-==========================================================*/
+// ==========================================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* ======================================================
+    // ======================================================
 
-       MOBILE MENU
+    // MOBILE MENU
 
-    ====================================================== */
+    // ======================================================
 
     const menuToggle = document.querySelector(".menu-toggle");
 
-    const navLinks = document.querySelector(".nav-links");
+    const navMenu = document.querySelector(".nav-menu");
 
-    if (menuToggle && navLinks) {
+    if (menuToggle && navMenu) {
 
         menuToggle.addEventListener("click", function () {
 
-            navLinks.classList.toggle("active");
+            navMenu.classList.toggle("active");
+
+            menuToggle.classList.toggle("active");
 
         });
 
-        document.querySelectorAll(".nav-links a").forEach(function (link) {
+        // Close mobile menu when a navigation link is clicked
+
+        const navLinks = navMenu.querySelectorAll("a");
+
+        navLinks.forEach(function (link) {
 
             link.addEventListener("click", function () {
 
-                navLinks.classList.remove("active");
+                navMenu.classList.remove("active");
+
+                menuToggle.classList.remove("active");
 
             });
 
@@ -38,11 +44,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    /* ======================================================
+    // ======================================================
 
-       STICKY HEADER
+    // STICKY HEADER
 
-    ====================================================== */
+    // ======================================================
 
     const header = document.querySelector("header");
 
@@ -64,25 +70,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    /* ======================================================
+    // ======================================================
 
-       ACTIVE NAVIGATION
+    // ACTIVE NAVIGATION LINK
 
-    ====================================================== */
+    // ======================================================
 
-    const currentPage =
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
-        window.location.pathname.split("/").pop();
+    const navigationLinks = document.querySelectorAll(
 
-    document.querySelectorAll(".nav-links a").forEach(function (link) {
+        ".nav-menu a, .main-nav a"
+
+    );
+
+    navigationLinks.forEach(function (link) {
 
         const href = link.getAttribute("href");
 
+        if (!href) {
+
+            return;
+
+        }
+
+        const linkPage = href.split("#")[0].split("/").pop();
+
         if (
 
-            href === currentPage ||
+            linkPage === currentPage ||
 
-            (currentPage === "" && href === "index.html")
+            (currentPage === "" && linkPage === "index.html")
 
         ) {
 
@@ -92,91 +110,107 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-    /* ======================================================
+    // ======================================================
 
-       SCROLL TO TOP BUTTON
+    // SCROLL TO TOP
 
-    ====================================================== */
+    // ======================================================
 
-    const scrollButton = document.createElement("button");
+    const scrollTopButton = document.querySelector(
 
-    scrollButton.innerHTML = "↑";
-
-    scrollButton.className = "scroll-top";
-
-    scrollButton.setAttribute("aria-label", "Scroll to top");
-
-    scrollButton.type = "button";
-
-    document.body.appendChild(scrollButton);
-
-    window.addEventListener("scroll", function () {
-
-        if (window.scrollY > 400) {
-
-            scrollButton.classList.add("show");
-
-        } else {
-
-            scrollButton.classList.remove("show");
-
-        }
-
-    });
-
-    scrollButton.addEventListener("click", function () {
-
-        window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
-
-        });
-
-    });
-
-    /* ======================================================
-
-       REVEAL ANIMATION
-
-    ====================================================== */
-
-    const reveals = document.querySelectorAll(
-
-        ".card, .service-card, .profile-card, .value-card, .job-card, .insight-card"
+        ".scroll-to-top, #scrollToTop"
 
     );
 
-    function revealOnScroll() {
+    if (scrollTopButton) {
 
-        const trigger = window.innerHeight * 0.90;
+        window.addEventListener("scroll", function () {
 
-        reveals.forEach(function (item) {
+            if (window.scrollY > 300) {
 
-            const top =
+                scrollTopButton.classList.add("show");
 
-                item.getBoundingClientRect().top;
+                scrollTopButton.classList.add("visible");
 
-            if (top < trigger) {
+            } else {
 
-                item.classList.add("fade-in");
+                scrollTopButton.classList.remove("show");
+
+                scrollTopButton.classList.remove("visible");
 
             }
 
         });
 
+        scrollTopButton.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        });
+
     }
 
-    window.addEventListener("scroll", revealOnScroll);
+    // ======================================================
 
-    revealOnScroll();
+    // REVEAL ANIMATIONS
 
-    /* ======================================================
+    // ======================================================
 
-       CONTACT FORM VALIDATION
+    const revealElements = document.querySelectorAll(
 
-    ====================================================== */
+        ".reveal, .fade-in, .slide-up"
+
+    );
+
+    if ("IntersectionObserver" in window && revealElements.length > 0) {
+
+        const revealObserver = new IntersectionObserver(
+
+            function (entries, observer) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+
+            {
+
+                threshold: 0.15
+
+            }
+
+        );
+
+        revealElements.forEach(function (element) {
+
+            revealObserver.observe(element);
+
+        });
+
+    }
+
+    // ======================================================
+
+    // FORM VALIDATION
+
+    // ======================================================
 
     const forms = document.querySelectorAll("form");
 
@@ -184,23 +218,55 @@ document.addEventListener("DOMContentLoaded", function () {
 
         form.addEventListener("submit", function (event) {
 
-            const requiredFields =
-
-                form.querySelectorAll("[required]");
-
             let valid = true;
+
+            const requiredFields = form.querySelectorAll(
+
+                "input[required], textarea[required], select[required]"
+
+            );
 
             requiredFields.forEach(function (field) {
 
-                if (field.value.trim() === "") {
+                if (!field.value.trim()) {
 
                     valid = false;
 
-                    field.style.borderColor = "#FF0000";
+                    field.classList.add("error");
 
                 } else {
 
-                    field.style.borderColor = "";
+                    field.classList.remove("error");
+
+                }
+
+            });
+
+            const emailFields = form.querySelectorAll(
+
+                'input[type="email"]'
+
+            );
+
+            emailFields.forEach(function (field) {
+
+                if (field.value.trim() !== "") {
+
+                    const emailPattern =
+
+                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                    if (!emailPattern.test(field.value.trim())) {
+
+                        valid = false;
+
+                        field.classList.add("error");
+
+                    } else {
+
+                        field.classList.remove("error");
+
+                    }
 
                 }
 
@@ -210,51 +276,73 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 event.preventDefault();
 
-                alert("Please complete all required fields.");
-
             }
 
         });
 
     });
 
-});
+    // ======================================================
 
-/* ==========================================================
+    // READ MORE / READ LESS
 
-   READ MORE / READ LESS
+    // ======================================================
 
-========================================================== */
+    const readMoreButtons = document.querySelectorAll(
 
-document.addEventListener("DOMContentLoaded", function () {
+        ".read-more-btn, .read-more"
 
-    const buttons =
+    );
 
-        document.querySelectorAll(".read-more-btn");
+    readMoreButtons.forEach(function (button) {
 
-    buttons.forEach(function (button) {
+        button.addEventListener("click", function (event) {
 
-        button.addEventListener("click", function () {
+            event.preventDefault();
 
-            const moreText =
+            const targetId = button.getAttribute("data-target");
 
-                this.previousElementSibling;
+            let target = null;
 
-            if (!moreText) {
+            if (targetId) {
+
+                target = document.getElementById(targetId);
+
+            }
+
+            if (!target) {
+
+                target = button.previousElementSibling;
+
+            }
+
+            if (!target) {
 
                 return;
 
             }
 
-            moreText.classList.toggle("show");
+            const isHidden =
 
-            if (moreText.classList.contains("show")) {
+                target.style.display === "none" ||
 
-                this.textContent = "Read Less";
+                !target.classList.contains("expanded");
+
+            if (isHidden) {
+
+                target.style.display = "block";
+
+                target.classList.add("expanded");
+
+                button.textContent = "Read Less";
 
             } else {
 
-                this.textContent = "Read More";
+                target.style.display = "none";
+
+                target.classList.remove("expanded");
+
+                button.textContent = "Read More";
 
             }
 
@@ -262,521 +350,722 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-});
+    // ======================================================
 
-/* ==========================================================
+    // TEAM SECTION NAVIGATION
 
-   TEAM SECTION NAVIGATION
+    // ======================================================
 
-========================================================== */
+    const teamSectionLinks = document.querySelectorAll(
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    function activateTeamSection() {
-
-        const hash =
-
-            window.location.hash.substring(1);
-
-        const panels =
-
-            document.querySelectorAll(".team-panel");
-
-        if (!panels.length) {
-
-            return;
-
-        }
-
-        /* No section selected:
-
-           keep the page's default active section */
-
-        if (!hash) {
-
-            return;
-
-        }
-
-        const selectedPanel =
-
-            document.getElementById(hash);
-
-        /* Ignore unrelated hashes */
-
-        if (
-
-            !selectedPanel ||
-
-            !selectedPanel.classList.contains("team-panel")
-
-        ) {
-
-            return;
-
-        }
-
-        /* Hide all panels */
-
-        panels.forEach(function (panel) {
-
-            panel.classList.remove("active");
-
-        });
-
-        /* Show selected panel */
-
-        selectedPanel.classList.add("active");
-
-        /* Scroll to selected section */
-
-        setTimeout(function () {
-
-            selectedPanel.scrollIntoView({
-
-                behavior: "smooth",
-
-                block: "start"
-
-            });
-
-        }, 100);
-
-    }
-
-    activateTeamSection();
-
-    window.addEventListener(
-
-        "hashchange",
-
-        activateTeamSection
+        'a[href^="team.html#"], a[href^="#"]'
 
     );
 
-    /* ======================================================
+    teamSectionLinks.forEach(function (link) {
 
-       MOBILE TEAM DROPDOWN
+        link.addEventListener("click", function () {
 
-    ====================================================== */
+            const href = link.getAttribute("href");
 
-    const teamDropdown =
+            if (!href || href === "#") {
 
-        document.querySelector(".nav-dropdown > a");
-
-    if (teamDropdown) {
-
-        teamDropdown.addEventListener(
-
-            "click",
-
-            function (event) {
-
-                if (window.innerWidth <= 768) {
-
-                    event.preventDefault();
-
-                    this.parentElement.classList.toggle("open");
-
-                }
+                return;
 
             }
 
-        );
+            const hash = href.includes("#")
 
-    }
+                ? href.substring(href.indexOf("#"))
 
-});
+                : "";
 
-/* ==========================================================
+            if (!hash) {
 
-   HOMEPAGE PHOTO GALLERY SLIDESHOW
-
-   Uses:
-
-   .about-home-slide
-
-   .about-home-dot
-
-   This is SEPARATE from the homepage background slideshow.
-
-========================================================== */
-
-(function () {
-
-    function startHomeGallerySlideshow() {
-
-        const slides =
-
-            document.querySelectorAll(".about-home-slide");
-
-        const dots =
-
-            document.querySelectorAll(".about-home-dot");
-
-        if (!slides.length) {
-
-            return;
-
-        }
-
-        let slideIndex = 0;
-
-        function showSlide(index) {
-
-            slides.forEach(function (slide) {
-
-                slide.classList.remove("active");
-
-            });
-
-            dots.forEach(function (dot) {
-
-                dot.classList.remove("active");
-
-            });
-
-            slides[index].classList.add("active");
-
-            if (dots[index]) {
-
-                dots[index].classList.add("active");
+                return;
 
             }
 
-        }
+            const target = document.querySelector(hash);
 
-        /* Show first photograph */
+            if (target) {
 
-        showSlide(0);
+                setTimeout(function () {
 
-        /* Dot navigation */
+                    const headerHeight = header
 
-        dots.forEach(function (dot, index) {
+                        ? header.offsetHeight
 
-            dot.addEventListener("click", function () {
+                        : 0;
 
-                slideIndex = index;
+                    const targetPosition =
 
-                showSlide(slideIndex);
+                        target.getBoundingClientRect().top +
 
-            });
+                        window.pageYOffset -
+
+                        headerHeight -
+
+                        20;
+
+                    window.scrollTo({
+
+                        top: targetPosition,
+
+                        behavior: "smooth"
+
+                    });
+
+                }, 100);
+
+            }
 
         });
 
-        /* Automatic slideshow */
-
-        setInterval(function () {
-
-            slideIndex++;
-
-            if (slideIndex >= slides.length) {
-
-                slideIndex = 0;
-
-            }
-
-            showSlide(slideIndex);
-
-        }, 4000);
-
-    }
-
-    if (document.readyState === "loading") {
-
-        document.addEventListener(
-
-            "DOMContentLoaded",
-
-            startHomeGallerySlideshow
-
-        );
-
-    } else {
-
-        startHomeGallerySlideshow();
-
-    }
-
-})();
-
-/* ==========================================================
-
-   HOMEPAGE BACKGROUND SLIDESHOW
-
-   IMPORTANT:
-
-   Uses ONLY .mp-home-slide
-
-   This is deliberately separate from the homepage
-
-   photo gallery (.about-home-slide).
-
-========================================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const slides =
-
-        document.querySelectorAll(".mp-home-slide");
-
-    if (slides.length < 2) {
-
-        return;
-
-    }
-
-    let currentSlide = 0;
-
-    /* Make sure first slide is visible */
-
-    slides.forEach(function (slide, index) {
-
-        slide.classList.toggle(
-
-            "mp-home-slide-active",
-
-            index === 0
-
-        );
-
     });
 
-    /* Change background photograph every 5 seconds */
+    // ======================================================
 
-    setInterval(function () {
+    // MOBILE TEAM DROPDOWN
 
-        slides[currentSlide]
+    // ======================================================
 
-            .classList.remove("mp-home-slide-active");
+    const teamDropdownToggle = document.querySelector(
 
-        currentSlide++;
+        ".team-dropdown-toggle"
 
-        if (currentSlide >= slides.length) {
+    );
 
-            currentSlide = 0;
+    const teamDropdown = document.querySelector(
 
-        }
+        ".team-dropdown"
 
-        slides[currentSlide]
+    );
 
-            .classList.add("mp-home-slide-active");
+    if (teamDropdownToggle && teamDropdown) {
 
-    }, 5000);
+        teamDropdownToggle.addEventListener("click", function (event) {
 
-});
+            event.preventDefault();
 
-/* ==========================================================
+            teamDropdown.classList.toggle("active");
 
-   ABOUT US TEAM / COLLABORATION SLIDESHOW
+        });
 
-========================================================== */
+    }
 
-(function () {
+    // ======================================================
 
-    function startAboutTeamSlideshow() {
+    // HOMEPAGE PHOTO GALLERY SLIDESHOW
 
-        const slides =
+    // ======================================================
 
-            document.querySelectorAll(".about-team-slide");
+    const gallerySlides = document.querySelectorAll(
 
-        if (!slides.length) {
+        ".gallery-slide"
 
-            return;
+    );
 
-        }
+    if (gallerySlides.length > 1) {
 
-        let currentSlide = 0;
+        let galleryIndex = 0;
 
-        function showSlide(index) {
+        function showGallerySlide(index) {
 
-            slides.forEach(function (slide) {
+            gallerySlides.forEach(function (slide, i) {
 
-                slide.classList.remove("active");
+                slide.classList.toggle(
+
+                    "active",
+
+                    i === index
+
+                );
 
             });
 
-            slides[index].classList.add("active");
-
         }
 
-        showSlide(0);
+        showGallerySlide(galleryIndex);
 
         setInterval(function () {
 
-            currentSlide++;
+            galleryIndex++;
 
-            if (currentSlide >= slides.length) {
+            if (galleryIndex >= gallerySlides.length) {
 
-                currentSlide = 0;
+                galleryIndex = 0;
 
             }
 
-            showSlide(currentSlide);
+            showGallerySlide(galleryIndex);
 
         }, 5000);
 
     }
 
-    if (document.readyState === "loading") {
+    // ======================================================
 
-        document.addEventListener(
+    // HOMEPAGE BACKGROUND SLIDESHOW
 
-            "DOMContentLoaded",
+    // ======================================================
 
-            startAboutTeamSlideshow
+    const backgroundSlides = document.querySelectorAll(
 
-        );
-
-    } else {
-
-        startAboutTeamSlideshow();
-
-    }
-
-})();
-
-/* ==========================================================
-
-   OUR PORTFOLIO SLIDESHOW
-
-========================================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const slides =
-
-        document.querySelectorAll(".portfolio-slide");
-
-    if (!slides.length) {
-
-        return;
-
-    }
-
-    let currentSlide = 0;
-
-    /* Ensure first slide is active */
-
-    slides.forEach(function (slide, index) {
-
-        slide.classList.toggle(
-
-            "active",
-
-            index === 0
-
-        );
-
-    });
-
-    setInterval(function () {
-
-        slides[currentSlide]
-
-            .classList.remove("active");
-
-        currentSlide++;
-
-        if (currentSlide >= slides.length) {
-
-            currentSlide = 0;
-
-        }
-
-        slides[currentSlide]
-
-            .classList.add("active");
-
-    }, 5000);
-
-});
-
-/* ==========================================================
-
-   CAREERS PHOTO SLIDESHOW
-
-========================================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const careerSlides =
-
-        document.querySelectorAll(".careers-slide");
-
-    if (!careerSlides.length) {
-
-        return;
-
-    }
-
-    let careerIndex = 0;
-
-    /* Ensure first slide is active */
-
-    careerSlides.forEach(function (slide, index) {
-
-        slide.classList.toggle(
-
-            "active",
-
-            index === 0
-
-        );
-
-    });
-
-    setInterval(function () {
-
-        careerSlides[careerIndex]
-
-            .classList.remove("active");
-
-        careerIndex++;
-
-        if (careerIndex >= careerSlides.length) {
-
-            careerIndex = 0;
-
-        }
-
-        careerSlides[careerIndex]
-
-            .classList.add("active");
-
-    }, 4000);
-
-});
-
-/* ==========================================================
-
-   REDUCED MOTION ACCESSIBILITY
-
-========================================================== */
-
-(function () {
-
-    const reducedMotion =
-
-        window.matchMedia(
-
-            "(prefers-reduced-motion: reduce)"
-
-        );
-
-    if (!reducedMotion.matches) {
-
-        return;
-
-    }
-
-    document.documentElement.classList.add(
-
-        "reduce-motion"
+        ".background-slide, .hero-background-slide"
 
     );
 
-})();
+    if (backgroundSlides.length > 1) {
 
+        let backgroundIndex = 0;
+
+        backgroundSlides.forEach(function (slide, index) {
+
+            slide.classList.toggle(
+
+                "active",
+
+                index === 0
+
+            );
+
+        });
+
+        setInterval(function () {
+
+            backgroundSlides[backgroundIndex].classList.remove(
+
+                "active"
+
+            );
+
+            backgroundIndex++;
+
+            if (backgroundIndex >= backgroundSlides.length) {
+
+                backgroundIndex = 0;
+
+            }
+
+            backgroundSlides[backgroundIndex].classList.add(
+
+                "active"
+
+            );
+
+        }, 6000);
+
+    }
+
+    // ======================================================
+
+    // ABOUT PAGE TEAM SLIDESHOW
+
+    // ======================================================
+
+    const aboutSlides = document.querySelectorAll(
+
+        ".about-team-slide"
+
+    );
+
+    if (aboutSlides.length > 1) {
+
+        let aboutIndex = 0;
+
+        function showAboutSlide(index) {
+
+            aboutSlides.forEach(function (slide, i) {
+
+                slide.classList.toggle(
+
+                    "active",
+
+                    i === index
+
+                );
+
+            });
+
+        }
+
+        showAboutSlide(aboutIndex);
+
+        setInterval(function () {
+
+            aboutIndex++;
+
+            if (aboutIndex >= aboutSlides.length) {
+
+                aboutIndex = 0;
+
+            }
+
+            showAboutSlide(aboutIndex);
+
+        }, 5000);
+
+    }
+
+    // ======================================================
+
+    // PORTFOLIO SLIDESHOW
+
+    // ======================================================
+
+    const portfolioSlides = document.querySelectorAll(
+
+        ".portfolio-slide"
+
+    );
+
+    if (portfolioSlides.length > 1) {
+
+        let portfolioIndex = 0;
+
+        function showPortfolioSlide(index) {
+
+            portfolioSlides.forEach(function (slide, i) {
+
+                slide.classList.toggle(
+
+                    "active",
+
+                    i === index
+
+                );
+
+            });
+
+        }
+
+        showPortfolioSlide(portfolioIndex);
+
+        setInterval(function () {
+
+            portfolioIndex++;
+
+            if (portfolioIndex >= portfolioSlides.length) {
+
+                portfolioIndex = 0;
+
+            }
+
+            showPortfolioSlide(portfolioIndex);
+
+        }, 5000);
+
+    }
+
+    // ======================================================
+
+    // CAREERS SLIDESHOW
+
+    // ======================================================
+
+    const careerSlides = document.querySelectorAll(
+
+        ".career-slide"
+
+    );
+
+    if (careerSlides.length > 1) {
+
+        let careerIndex = 0;
+
+        function showCareerSlide(index) {
+
+            careerSlides.forEach(function (slide, i) {
+
+                slide.classList.toggle(
+
+                    "active",
+
+                    i === index
+
+                );
+
+            });
+
+        }
+
+        showCareerSlide(careerIndex);
+
+        setInterval(function () {
+
+            careerIndex++;
+
+            if (careerIndex >= careerSlides.length) {
+
+                careerIndex = 0;
+
+            }
+
+            showCareerSlide(careerIndex);
+
+        }, 5000);
+
+    }
+
+    // ======================================================
+
+    // TEAM PAGE HERO - 5 PHOTO SLIDESHOW
+
+    // ======================================================
+
+    //
+
+    // IMPORTANT:
+
+    // This slideshow is designed to show the COMPLETE photo.
+
+    //
+
+    // The CSS must use:
+
+    //
+
+    // object-fit: contain;
+
+    //
+
+    // NOT:
+
+    //
+
+    // object-fit: cover;
+
+    //
+
+    // The "cover" setting crops photos and can cut off
+
+    // people's heads.
+
+    // ======================================================
+
+    const teamHero = document.querySelector(
+
+        ".team-hero-slideshow"
+
+    );
+
+    if (teamHero) {
+
+        const teamSlides = teamHero.querySelectorAll(
+
+            ".hero-slide"
+
+        );
+
+        const teamDots = teamHero.querySelectorAll(
+
+            ".hero-slide-dots button"
+
+        );
+
+        if (teamSlides.length > 0) {
+
+            let teamIndex = 0;
+
+            let teamTimer = null;
+
+            // ----------------------------------------------
+
+            // SHOW TEAM SLIDE
+
+            // ----------------------------------------------
+
+            function showTeamSlide(index) {
+
+                if (teamSlides.length === 0) {
+
+                    return;
+
+                }
+
+                if (index < 0) {
+
+                    index = teamSlides.length - 1;
+
+                }
+
+                if (index >= teamSlides.length) {
+
+                    index = 0;
+
+                }
+
+                teamIndex = index;
+
+                teamSlides.forEach(function (slide, i) {
+
+                    const isActive = i === teamIndex;
+
+                    slide.classList.toggle(
+
+                        "active",
+
+                        isActive
+
+                    );
+
+                    slide.setAttribute(
+
+                        "aria-hidden",
+
+                        isActive ? "false" : "true"
+
+                    );
+
+                });
+
+                teamDots.forEach(function (dot, i) {
+
+                    const isActive = i === teamIndex;
+
+                    dot.classList.toggle(
+
+                        "active",
+
+                        isActive
+
+                    );
+
+                    dot.setAttribute(
+
+                        "aria-selected",
+
+                        isActive ? "true" : "false"
+
+                    );
+
+                });
+
+            }
+
+            // ----------------------------------------------
+
+            // NEXT TEAM SLIDE
+
+            // ----------------------------------------------
+
+            function nextTeamSlide() {
+
+                showTeamSlide(
+
+                    teamIndex + 1
+
+                );
+
+            }
+
+            // ----------------------------------------------
+
+            // START TEAM SLIDESHOW
+
+            // ----------------------------------------------
+
+            function startTeamSlideshow() {
+
+                stopTeamSlideshow();
+
+                if (teamSlides.length > 1) {
+
+                    teamTimer = setInterval(
+
+                        nextTeamSlide,
+
+                        5000
+
+                    );
+
+                }
+
+            }
+
+            // ----------------------------------------------
+
+            // STOP TEAM SLIDESHOW
+
+            // ----------------------------------------------
+
+            function stopTeamSlideshow() {
+
+                if (teamTimer) {
+
+                    clearInterval(teamTimer);
+
+                    teamTimer = null;
+
+                }
+
+            }
+
+            // ----------------------------------------------
+
+            // DOT NAVIGATION
+
+            // ----------------------------------------------
+
+            teamDots.forEach(function (dot, index) {
+
+                dot.addEventListener("click", function () {
+
+                    showTeamSlide(index);
+
+                    startTeamSlideshow();
+
+                });
+
+            });
+
+            // ----------------------------------------------
+
+            // PAUSE WHEN MOUSE IS OVER SLIDESHOW
+
+            // ----------------------------------------------
+
+            teamHero.addEventListener(
+
+                "mouseenter",
+
+                function () {
+
+                    stopTeamSlideshow();
+
+                }
+
+            );
+
+            // ----------------------------------------------
+
+            // RESUME WHEN MOUSE LEAVES
+
+            // ----------------------------------------------
+
+            teamHero.addEventListener(
+
+                "mouseleave",
+
+                function () {
+
+                    startTeamSlideshow();
+
+                }
+
+            );
+
+            // ----------------------------------------------
+
+            // KEYBOARD NAVIGATION
+
+            // ----------------------------------------------
+
+            teamHero.addEventListener(
+
+                "keydown",
+
+                function (event) {
+
+                    if (event.key === "ArrowRight") {
+
+                        event.preventDefault();
+
+                        nextTeamSlide();
+
+                        startTeamSlideshow();
+
+                    }
+
+                    if (event.key === "ArrowLeft") {
+
+                        event.preventDefault();
+
+                        showTeamSlide(
+
+                            teamIndex - 1
+
+                        );
+
+                        startTeamSlideshow();
+
+                    }
+
+                }
+
+            );
+
+            // ----------------------------------------------
+
+            // INITIALIZE TEAM SLIDESHOW
+
+            // ----------------------------------------------
+
+            showTeamSlide(0);
+
+            startTeamSlideshow();
+
+        }
+
+    }
+
+    // ======================================================
+
+    // REDUCED MOTION SUPPORT
+
+    // ======================================================
+
+    const reducedMotionQuery = window.matchMedia(
+
+        "(prefers-reduced-motion: reduce)"
+
+    );
+
+    function updateReducedMotion() {
+
+        if (reducedMotionQuery.matches) {
+
+            document.body.classList.add(
+
+                "reduced-motion"
+
+            );
+
+        } else {
+
+            document.body.classList.remove(
+
+                "reduced-motion"
+
+            );
+
+        }
+
+    }
+
+    updateReducedMotion();
+
+    if (reducedMotionQuery.addEventListener) {
+
+        reducedMotionQuery.addEventListener(
+
+            "change",
+
+            updateReducedMotion
+
+        );
+
+    } else if (reducedMotionQuery.addListener) {
+
+        reducedMotionQuery.addListener(
+
+            updateReducedMotion
+
+        );
+
+    }
+
+});
 
 
