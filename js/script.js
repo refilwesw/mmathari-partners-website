@@ -26,8 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-        // Close mobile menu when a navigation link is clicked
-
         const navLinks = navMenu.querySelectorAll("a");
 
         navLinks.forEach(function (link) {
@@ -76,11 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ======================================================
 
-    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+    const currentPage =
+
+        window.location.pathname.split("/").pop() || "index.html";
 
     const navigationLinks = document.querySelectorAll(
 
-        ".nav-menu a, .main-nav a"
+        ".nav-menu a, .main-nav a, .nav-links a"
 
     );
 
@@ -94,7 +94,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
-        const linkPage = href.split("#")[0].split("/").pop();
+        const linkPage =
+
+            href.split("#")[0].split("/").pop();
 
         if (
 
@@ -170,7 +172,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     );
 
-    if ("IntersectionObserver" in window && revealElements.length > 0) {
+    if (
+
+        "IntersectionObserver" in window &&
+
+        revealElements.length > 0
+
+    ) {
 
         const revealObserver = new IntersectionObserver(
 
@@ -300,19 +308,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
             event.preventDefault();
 
-            const targetId = button.getAttribute("data-target");
+            const targetId =
+
+                button.getAttribute("data-target");
 
             let target = null;
 
             if (targetId) {
 
-                target = document.getElementById(targetId);
+                target =
+
+                    document.getElementById(targetId);
 
             }
 
             if (!target) {
 
-                target = button.previousElementSibling;
+                target =
+
+                    button.previousElementSibling;
 
             }
 
@@ -366,7 +380,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         link.addEventListener("click", function () {
 
-            const href = link.getAttribute("href");
+            const href =
+
+                link.getAttribute("href");
 
             if (!href || href === "#") {
 
@@ -374,11 +390,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             }
 
-            const hash = href.includes("#")
+            const hash =
 
-                ? href.substring(href.indexOf("#"))
+                href.includes("#")
 
-                : "";
+                    ? href.substring(href.indexOf("#"))
+
+                    : "";
 
             if (!hash) {
 
@@ -386,17 +404,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
             }
 
-            const target = document.querySelector(hash);
+            const target =
+
+                document.querySelector(hash);
 
             if (target) {
 
                 setTimeout(function () {
 
-                    const headerHeight = header
+                    const headerHeight =
 
-                        ? header.offsetHeight
+                        header
 
-                        : 0;
+                            ? header.offsetHeight
+
+                            : 0;
 
                     const targetPosition =
 
@@ -430,27 +452,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ======================================================
 
-    const teamDropdownToggle = document.querySelector(
+    const teamDropdownToggle =
 
-        ".team-dropdown-toggle"
+        document.querySelector(
 
-    );
+            ".team-dropdown-toggle"
 
-    const teamDropdown = document.querySelector(
+        );
 
-        ".team-dropdown"
+    const teamDropdown =
 
-    );
+        document.querySelector(
+
+            ".team-dropdown"
+
+        );
 
     if (teamDropdownToggle && teamDropdown) {
 
-        teamDropdownToggle.addEventListener("click", function (event) {
+        teamDropdownToggle.addEventListener(
 
-            event.preventDefault();
+            "click",
 
-            teamDropdown.classList.toggle("active");
+            function (event) {
 
-        });
+                event.preventDefault();
+
+                teamDropdown.classList.toggle(
+
+                    "active"
+
+                );
+
+            }
+
+        );
 
     }
 
@@ -460,11 +496,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ======================================================
 
-    const gallerySlides = document.querySelectorAll(
+    const gallerySlides =
 
-        ".gallery-slide"
+        document.querySelectorAll(
 
-    );
+            ".gallery-slide"
+
+        );
 
     if (gallerySlides.length > 1) {
 
@@ -472,7 +510,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function showGallerySlide(index) {
 
-            gallerySlides.forEach(function (slide, i) {
+            gallerySlides.forEach(function (
+
+                slide,
+
+                i
+
+            ) {
 
                 slide.classList.toggle(
 
@@ -492,13 +536,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             galleryIndex++;
 
-            if (galleryIndex >= gallerySlides.length) {
+            if (
+
+                galleryIndex >=
+
+                gallerySlides.length
+
+            ) {
 
                 galleryIndex = 0;
 
             }
 
-            showGallerySlide(galleryIndex);
+            showGallerySlide(
+
+                galleryIndex
+
+            );
 
         }, 5000);
 
@@ -510,49 +564,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ======================================================
 
-    const backgroundSlides = document.querySelectorAll(
+    const backgroundSlides =
 
-        ".background-slide, .hero-background-slide"
+        document.querySelectorAll(
 
-    );
+            ".background-slide, .hero-background-slide"
+
+        );
 
     if (backgroundSlides.length > 1) {
 
         let backgroundIndex = 0;
 
-        backgroundSlides.forEach(function (slide, index) {
+        backgroundSlides.forEach(
 
-            slide.classList.toggle(
+            function (slide, index) {
 
-                "active",
+                slide.classList.toggle(
 
-                index === 0
+                    "active",
 
-            );
+                    index === 0
 
-        });
+                );
+
+            }
+
+        );
 
         setInterval(function () {
 
-            backgroundSlides[backgroundIndex].classList.remove(
+            backgroundSlides[
 
-                "active"
+                backgroundIndex
 
-            );
+            ].classList.remove("active");
 
             backgroundIndex++;
 
-            if (backgroundIndex >= backgroundSlides.length) {
+            if (
+
+                backgroundIndex >=
+
+                backgroundSlides.length
+
+            ) {
 
                 backgroundIndex = 0;
 
             }
 
-            backgroundSlides[backgroundIndex].classList.add(
+            backgroundSlides[
 
-                "active"
+                backgroundIndex
 
-            );
+            ].classList.add("active");
 
         }, 6000);
 
@@ -564,11 +630,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ======================================================
 
-    const aboutSlides = document.querySelectorAll(
+    const aboutSlides =
 
-        ".about-team-slide"
+        document.querySelectorAll(
 
-    );
+            ".about-team-slide"
+
+        );
 
     if (aboutSlides.length > 1) {
 
@@ -576,17 +644,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function showAboutSlide(index) {
 
-            aboutSlides.forEach(function (slide, i) {
+            aboutSlides.forEach(
 
-                slide.classList.toggle(
+                function (slide, i) {
 
-                    "active",
+                    slide.classList.toggle(
 
-                    i === index
+                        "active",
 
-                );
+                        i === index
 
-            });
+                    );
+
+                }
+
+            );
 
         }
 
@@ -596,13 +668,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             aboutIndex++;
 
-            if (aboutIndex >= aboutSlides.length) {
+            if (
+
+                aboutIndex >=
+
+                aboutSlides.length
+
+            ) {
 
                 aboutIndex = 0;
 
             }
 
-            showAboutSlide(aboutIndex);
+            showAboutSlide(
+
+                aboutIndex
+
+            );
 
         }, 5000);
 
@@ -614,11 +696,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ======================================================
 
-    const portfolioSlides = document.querySelectorAll(
+    const portfolioSlides =
 
-        ".portfolio-slide"
+        document.querySelectorAll(
 
-    );
+            ".portfolio-slide"
+
+        );
 
     if (portfolioSlides.length > 1) {
 
@@ -626,33 +710,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function showPortfolioSlide(index) {
 
-            portfolioSlides.forEach(function (slide, i) {
+            portfolioSlides.forEach(
 
-                slide.classList.toggle(
+                function (slide, i) {
 
-                    "active",
+                    slide.classList.toggle(
 
-                    i === index
+                        "active",
 
-                );
+                        i === index
 
-            });
+                    );
+
+                }
+
+            );
 
         }
 
-        showPortfolioSlide(portfolioIndex);
+        showPortfolioSlide(
+
+            portfolioIndex
+
+        );
 
         setInterval(function () {
 
             portfolioIndex++;
 
-            if (portfolioIndex >= portfolioSlides.length) {
+            if (
+
+                portfolioIndex >=
+
+                portfolioSlides.length
+
+            ) {
 
                 portfolioIndex = 0;
 
             }
 
-            showPortfolioSlide(portfolioIndex);
+            showPortfolioSlide(
+
+                portfolioIndex
+
+            );
 
         }, 5000);
 
@@ -664,11 +766,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ======================================================
 
-    const careerSlides = document.querySelectorAll(
+    const careerSlides =
 
-        ".career-slide"
+        document.querySelectorAll(
 
-    );
+            ".career-slide"
+
+        );
 
     if (careerSlides.length > 1) {
 
@@ -676,17 +780,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function showCareerSlide(index) {
 
-            careerSlides.forEach(function (slide, i) {
+            careerSlides.forEach(
 
-                slide.classList.toggle(
+                function (slide, i) {
 
-                    "active",
+                    slide.classList.toggle(
 
-                    i === index
+                        "active",
 
-                );
+                        i === index
 
-            });
+                    );
+
+                }
+
+            );
 
         }
 
@@ -696,13 +804,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             careerIndex++;
 
-            if (careerIndex >= careerSlides.length) {
+            if (
+
+                careerIndex >=
+
+                careerSlides.length
+
+            ) {
 
                 careerIndex = 0;
 
             }
 
-            showCareerSlide(careerIndex);
+            showCareerSlide(
+
+                careerIndex
+
+            );
 
         }, 5000);
 
@@ -710,59 +828,67 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ======================================================
 
-    // TEAM PAGE HERO - 5 PHOTO SLIDESHOW
+    // TEAM PAGE HERO
+
+    // 5 PHOTO SLIDESHOW
 
     // ======================================================
 
     //
 
-    // IMPORTANT:
-
-    // This slideshow is designed to show the COMPLETE photo.
+    // The Team HTML uses:
 
     //
 
-    // The CSS must use:
+    // .team-hero-slideshow
+
+    // .hero-slide
+
+    // .hero-slide active
+
+    // .hero-slide-dots
+
+    // .hero-dot
 
     //
 
-    // object-fit: contain;
+    // CSS controls the positioning.
+
+    // JavaScript controls which slide is active.
 
     //
 
-    // NOT:
+    // The CSS uses object-fit: contain so that complete
 
-    //
-
-    // object-fit: cover;
-
-    //
-
-    // The "cover" setting crops photos and can cut off
-
-    // people's heads.
+    // photographs are displayed without cropping heads.
 
     // ======================================================
 
-    const teamHero = document.querySelector(
+    const teamHero =
 
-        ".team-hero-slideshow"
+        document.querySelector(
 
-    );
+            ".team-hero-slideshow"
+
+        );
 
     if (teamHero) {
 
-        const teamSlides = teamHero.querySelectorAll(
+        const teamSlides =
 
-            ".hero-slide"
+            teamHero.querySelectorAll(
 
-        );
+                ".hero-slide"
 
-        const teamDots = teamHero.querySelectorAll(
+            );
 
-            ".hero-slide-dots button"
+        const teamDots =
 
-        );
+            teamHero.querySelectorAll(
+
+                ".hero-slide-dots button, .hero-dot"
+
+            );
 
         if (teamSlides.length > 0) {
 
@@ -778,7 +904,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             function showTeamSlide(index) {
 
-                if (teamSlides.length === 0) {
+                if (
+
+                    teamSlides.length === 0
+
+                ) {
 
                     return;
 
@@ -786,11 +916,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (index < 0) {
 
-                    index = teamSlides.length - 1;
+                    index =
+
+                        teamSlides.length - 1;
 
                 }
 
-                if (index >= teamSlides.length) {
+                if (
+
+                    index >=
+
+                    teamSlides.length
+
+                ) {
 
                     index = 0;
 
@@ -798,49 +936,73 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 teamIndex = index;
 
-                teamSlides.forEach(function (slide, i) {
+                // Show / hide slides
 
-                    const isActive = i === teamIndex;
+                teamSlides.forEach(
 
-                    slide.classList.toggle(
+                    function (slide, i) {
 
-                        "active",
+                        const isActive =
 
-                        isActive
+                            i === teamIndex;
 
-                    );
+                        slide.classList.toggle(
 
-                    slide.setAttribute(
+                            "active",
 
-                        "aria-hidden",
+                            isActive
 
-                        isActive ? "false" : "true"
+                        );
 
-                    );
+                        slide.setAttribute(
 
-                });
+                            "aria-hidden",
 
-                teamDots.forEach(function (dot, i) {
+                            isActive
 
-                    const isActive = i === teamIndex;
+                                ? "false"
 
-                    dot.classList.toggle(
+                                : "true"
 
-                        "active",
+                        );
 
-                        isActive
+                    }
 
-                    );
+                );
 
-                    dot.setAttribute(
+                // Update dots
 
-                        "aria-selected",
+                teamDots.forEach(
 
-                        isActive ? "true" : "false"
+                    function (dot, i) {
 
-                    );
+                        const isActive =
 
-                });
+                            i === teamIndex;
+
+                        dot.classList.toggle(
+
+                            "active",
+
+                            isActive
+
+                        );
+
+                        dot.setAttribute(
+
+                            "aria-selected",
+
+                            isActive
+
+                                ? "true"
+
+                                : "false"
+
+                        );
+
+                    }
+
+                );
 
             }
 
@@ -870,15 +1032,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 stopTeamSlideshow();
 
-                if (teamSlides.length > 1) {
+                if (
 
-                    teamTimer = setInterval(
+                    teamSlides.length > 1
 
-                        nextTeamSlide,
+                ) {
 
-                        5000
+                    teamTimer =
 
-                    );
+                        setInterval(
+
+                            nextTeamSlide,
+
+                            5000
+
+                        );
 
                 }
 
@@ -894,7 +1062,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (teamTimer) {
 
-                    clearInterval(teamTimer);
+                    clearInterval(
+
+                        teamTimer
+
+                    );
 
                     teamTimer = null;
 
@@ -908,21 +1080,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // ----------------------------------------------
 
-            teamDots.forEach(function (dot, index) {
+            teamDots.forEach(
 
-                dot.addEventListener("click", function () {
+                function (dot, index) {
 
-                    showTeamSlide(index);
+                    dot.addEventListener(
 
-                    startTeamSlideshow();
+                        "click",
 
-                });
+                        function () {
 
-            });
+                            showTeamSlide(
+
+                                index
+
+                            );
+
+                            startTeamSlideshow();
+
+                        }
+
+                    );
+
+                }
+
+            );
 
             // ----------------------------------------------
 
-            // PAUSE WHEN MOUSE IS OVER SLIDESHOW
+            // PAUSE ON MOUSE OVER
 
             // ----------------------------------------------
 
@@ -940,7 +1126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // ----------------------------------------------
 
-            // RESUME WHEN MOUSE LEAVES
+            // RESUME ON MOUSE LEAVE
 
             // ----------------------------------------------
 
@@ -968,7 +1154,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 function (event) {
 
-                    if (event.key === "ArrowRight") {
+                    if (
+
+                        event.key ===
+
+                        "ArrowRight"
+
+                    ) {
 
                         event.preventDefault();
 
@@ -978,7 +1170,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     }
 
-                    if (event.key === "ArrowLeft") {
+                    if (
+
+                        event.key ===
+
+                        "ArrowLeft"
+
+                    ) {
 
                         event.preventDefault();
 
@@ -1016,15 +1214,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ======================================================
 
-    const reducedMotionQuery = window.matchMedia(
+    const reducedMotionQuery =
 
-        "(prefers-reduced-motion: reduce)"
+        window.matchMedia(
 
-    );
+            "(prefers-reduced-motion: reduce)"
+
+        );
 
     function updateReducedMotion() {
 
-        if (reducedMotionQuery.matches) {
+        if (
+
+            reducedMotionQuery.matches
+
+        ) {
 
             document.body.classList.add(
 
@@ -1046,7 +1250,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateReducedMotion();
 
-    if (reducedMotionQuery.addEventListener) {
+    if (
+
+        reducedMotionQuery.addEventListener
+
+    ) {
 
         reducedMotionQuery.addEventListener(
 
@@ -1056,9 +1264,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         );
 
-    } else if (reducedMotionQuery.addListener) {
+    } else if (
+
+        reducedMotionQuery.addListener
+
+    ) {
 
         reducedMotionQuery.addListener(
+
+            "change",
 
             updateReducedMotion
 

@@ -5193,124 +5193,97 @@ transform: translateY(80px);
 }
 
 /* ==========================================================
-   TEAM HERO - 5 PHOTO SLIDESHOW
-   IMPORTANT: keep the complete photographs visible.
-   Do NOT use object-fit: cover here.
+   MMATHARI PARTNERS - TEAM HERO SLIDESHOW
+   FINAL MASTER RULES
    ========================================================== */
 
 .team-hero-slideshow {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0;
-    overflow: hidden;
-    isolation: isolate;
-    background: #ffffff;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    height: 600px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+    background: #ffffff !important;
 }
 
-/*
-   The active slide remains in normal document flow.
-   This allows the hero to take the natural height of
-   the photograph instead of forcing the photo into
-   a short, fixed-height box.
-*/
 .team-hero-slideshow .hero-slide {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 0;
-    transition: opacity 1.2s ease-in-out;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    z-index: 0 !important;
+    transition: opacity 1.2s ease-in-out !important;
 }
 
 .team-hero-slideshow .hero-slide.active {
-    position: relative;
-    opacity: 1;
-    visibility: visible;
-    z-index: 1;
+    position: absolute !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 2 !important;
 }
 
 .team-hero-slideshow .hero-slide img {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    margin: 0 auto;
-    object-fit: contain;
-    object-position: center center;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    background: #ffffff !important;
 }
 
-/* Slideshow dots */
 .team-hero-slideshow .hero-slide-dots {
-    position: absolute;
-    left: 50%;
-    bottom: 20px;
-    transform: translateX(-50%);
-    z-index: 10;
-
-    display: flex;
-    gap: 8px;
-
-    padding: 7px 10px;
-    border-radius: 20px;
-
-    background: rgba(0, 0, 0, 0.30);
-    backdrop-filter: blur(4px);
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 20px !important;
+    transform: translateX(-50%) !important;
+    z-index: 20 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 8px 12px !important;
+    border-radius: 20px !important;
+    background: rgba(0, 0, 0, 0.35) !important;
+    backdrop-filter: blur(4px) !important;
 }
 
+.team-hero-slideshow .hero-slide-dots button,
 .team-hero-slideshow .hero-dot {
-    width: 10px;
-    height: 10px;
-    padding: 0;
-
-    border: 1px solid #ffffff;
-    border-radius: 50%;
-
-    background: transparent;
-    cursor: pointer;
-
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease;
+    width: 11px !important;
+    height: 11px !important;
+    min-width: 11px !important;
+    min-height: 11px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 1px solid #ffffff !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    appearance: none !important;
 }
 
+.team-hero-slideshow .hero-slide-dots button.active,
 .team-hero-slideshow .hero-dot.active {
-    background: #ffffff;
-    transform: scale(1.15);
+    background: #ffffff !important;
 }
 
-/* Prevent the browser from treating the dots as form buttons */
-.team-hero-slideshow .hero-dot {
-    appearance: none;
-}
-
-/* Mobile */
 @media (max-width: 768px) {
     .team-hero-slideshow {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .team-hero-slideshow .hero-slide img {
-        width: 100%;
-        height: auto;
-    }
-
-    .team-hero-slideshow .hero-slide-dots {
-        bottom: 15px;
+        height: 450px !important;
     }
 }
 
 @media (max-width: 480px) {
-    .team-hero-slideshow .hero-slide-dots {
-        bottom: 12px;
-        gap: 6px;
-    }
-
-    .team-hero-slideshow .hero-dot {
-        width: 9px;
-        height: 9px;
+    .team-hero-slideshow {
+        height: 350px !important;
     }
 }
