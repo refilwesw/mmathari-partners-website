@@ -5188,7 +5188,9 @@ transform: translateY(80px);
     opacity: 0 !important;
     visibility: hidden !important;
     z-index: 0 !important;
-    display: block !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     transition: opacity 1.2s ease-in-out;
 }
 
@@ -5200,9 +5202,10 @@ transform: translateY(80px);
 
 .team-hero-slideshow .hero-slide img {
     display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     object-fit: contain !important;
